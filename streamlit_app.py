@@ -16,5 +16,6 @@ fruitlist = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/f
 streamlit.multiselect("Pick some fruits:", list(fruitlist.index))
 
 # Display the table on the page.
+fruitlist = fruitlist.set_index('Fruit')
 
 streamlit.dataframe(fruitlist)
