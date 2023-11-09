@@ -38,8 +38,6 @@ try:
    else:
       streamlit.dataframe(Return_fruit(fruit_choice))
      
-      # write your own comment - what does this do?
-      streamlit.dataframe(fruityvice_normalized)
 except:
    streamlit.error()
 
