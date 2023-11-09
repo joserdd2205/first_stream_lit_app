@@ -22,7 +22,11 @@ fruitlist = fruitlist.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Pick some fruits:", list(fruitlist.index), default=['Avocado', 'Strawberries'])
 fruits_to_show = fruitlist.loc[fruits_selected]
 # Display the table on the page.
-
+def Return_fruit(fruit):
+   fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit)
+   # write your own comment -what does the next line do? 
+   fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+   return fruityvice_normalized
 
 streamlit.dataframe(fruits_to_show)
 
@@ -32,9 +36,8 @@ try:
    if not fruit_choice:
       streamlit.error("Please select a fruit to get information")
    else:
-      fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-      # write your own comment -what does the next line do? 
-      fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+      streamlit.dataframe(Return_fruit(fruit_choice))
+     
       # write your own comment - what does this do?
       streamlit.dataframe(fruityvice_normalized)
 except:
